@@ -1,0 +1,5 @@
+**/.DS_Store
+config/config.php
+app/.htaccess
+app/node_modules/
+app/vendor/
