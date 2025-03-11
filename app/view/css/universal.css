@@ -77,8 +77,8 @@ body {
 #menu__toggle {
 	opacity: 0;
 	position: absolute;
-	top: 26px;
-	left: 26px;
+	top: 27px;
+	left: 27px;
 	height: 26px;
 	width: 26px;
 	margin: 0;
@@ -110,8 +110,8 @@ body {
 	display: flex;
 	align-items: center;
 	position: fixed;
-	top: 26px;
-	left: 26px;
+	top: 27px;
+	left: 27px;
 	width: 26px;
 	height: 26px;
 	cursor: pointer;
