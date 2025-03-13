@@ -1,11 +1,13 @@
 @charset "UTF-8";
 
 :root {
-		
+	
+	--catfish-blue: rgb(0, 121, 187);
+	--catfish-blue-dark: rgb(0, 39, 87);
+	--catfish-blue-light: rgb(29, 148, 201);
+	--catfish-blue-extralight: rgb(123, 174, 211); 
+	
 	/* Chota overrides */
-	--color-primary: #002757;
-	--bg-color: rgba(0, 121, 187, 1);
-	--bg-secondary-color: rgba(29, 148, 201, 1);
 	--font-family-sans: 'Poppins-Regular';;
 	
 	/*
@@ -70,7 +72,7 @@ body {
 	padding: 0;
 	color: #fff;
 	overflow: auto;
-	background: linear-gradient(124deg, var(--bg-color) 0%, var(--bg-secondary-color) 100%);
+	background: linear-gradient(124deg, var(--catfish-blue-light) 0%, var(--catfish-blue) 100%);
 }
 
 /* navigation */
@@ -92,13 +94,13 @@ body {
 #menu__toggle:checked ~ .menu__btn > span::before {
 	top: 0;
 	transform: rotate(0);
-	background-color: var(--color-primary);
+	background-color: var(--catfish-blue-dark);
 }
 
 #menu__toggle:checked ~ .menu__btn > span::after {
 	top: 0;
 	transform: rotate(90deg);
-	background-color: var(--color-primary);
+	background-color: var(--catfish-blue-dark	);
 }
 
 #menu__toggle:checked ~ .menu__box {
@@ -115,7 +117,7 @@ body {
 	width: 26px;
 	height: 26px;
 	cursor: pointer;
-	z-index: 1;
+	z-index: 1000;
 }
 
 .menu__btn > span,
@@ -153,6 +155,7 @@ body {
 	background-color: #ECEFF1;
 	box-shadow: 1px 0px 6px rgba(0, 0, 0, .2);
 	transition-duration: .25s;
+	z-index: 500;
 }
 
 .menu__item {
@@ -168,7 +171,7 @@ body {
 #page-content {
 	max-width: 600px;
 	height: 100%;
-	padding: 2em;
+	padding: 1em;
 	margin: 0 auto;
 	background-color: transparent;
 	color: #fff;
@@ -189,3 +192,94 @@ header {
 a {
 	color: #fff;
 }
+
+h2, h3 {
+	margin-bottom: 10px;
+}
+
+h2 {
+	margin-top: 0;
+}
+
+h3 {
+	margin-top: 2em;
+}
+
+.card {
+	box-shadow: none;
+	margin-bottom: 1em;
+	background-color: rgba(0, 39, 87, 0.5);
+	border-radius: 12px;
+	padding: 1.5rem 2rem 2rem;
+}
+
+.status-container {
+	margin: 1.5em 0 0 0;
+	display: flex;
+}
+
+.status {
+	display: inline-block;
+	width: 50%;
+	text-align: left;
+	padding: 1em;
+	border-radius: 8px;
+}
+
+.checkmark, .x {
+	font-family: 'Poppins-SemiBold';
+	font-weight: 700;
+	margin-right: 6px;
+}
+
+.checkmark {
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+	display: inline-block;
+}
+
+.game-opponent {
+	font-size: 1.3em;
+	line-height: 1.4;
+	font-family: 'Poppins-SemiBold';
+}
+
+.game-details {
+	margin-top: 0;
+}
+
+.button.inner-pad {
+	padding: 0;
+	border: 0;
+}
+
+.duties {
+	margin-top: 1.5em;
+}
+
+.duties .icon {
+	font-size: 2em;
+	vertical-align: middle;
+}
+
+.button.inner-pad span:not(.checkmark, .x) {
+	padding: 1em;
+}
+
+.button+.button {
+	margin-left: 2rem;
+}
+
+.player-count {
+	border: 0;
+	border-radius: 0 8px 8px 0;
+	background-color: transparent;
+	padding-left: 1em;
+}
+
+/*
+.status-in {
+	background-color: var(--bg-secondary-color);
+}
+*/

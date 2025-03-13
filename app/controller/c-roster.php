@@ -7,7 +7,7 @@ $required_css = array('roster');
 $required_js = array('roster' => 1);
 $required_modal = array();
 
-$query = $db->prepare("SELECT * FROM player");
+$query = $db->prepare("SELECT * FROM player ORDER BY player_lastname");
 $query->execute();
 $players = $query->fetchAll(PDO::FETCH_ASSOC);
 

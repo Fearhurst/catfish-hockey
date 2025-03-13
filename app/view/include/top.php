@@ -33,7 +33,7 @@
 							<span></span>
 						</label>
 						<ul class="menu__box">
-							<li><a class="menu__item" href="#">Schedule</a></li>
+							<li><a class="menu__item" href="schedule">Schedule</a></li>
 							<li><a class="menu__item" href="roster">Roster</a></li>
 							<li><a class="menu__item" href="#">Beer</a></li>
 							<li><hr /></li>

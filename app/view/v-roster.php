@@ -1,16 +1,14 @@
 <?php include ('include/top.php'); ?>
 
 <div id="page-content">
-
-	<h1>Roster</h1>
 	
-	<?php
-		
-		echo('<pre>');
-		print_r ($players);
-		echo('</pre>');
-		
-	?>
+	<?php foreach($players as $player) : ?>
+	<div class="card">
+		<span class="player-number">#<?php echo($player['player_number']); ?></span>
+		<span class="player-name"><?php echo($player['player_firstname']); ?> <?php echo($player['player_lastname']); ?></span>
+	</div>
+	
+	<?php endforeach; ?>
 
 </div>
 

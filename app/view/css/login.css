@@ -1,2 +1,17 @@
 @charset "UTF-8";
 
+#page-content {
+	text-align: center;
+}
+
+header {
+	display: none !important;
+}
+
+.logo {
+	width: 50%;
+}
+
+[type=submit] {
+	background-color: var(--catfish-blue-dark);
+}

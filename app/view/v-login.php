@@ -1,7 +1,13 @@
 <?php include ('include/top.php'); ?>
 
 <div id="page-content">
-			
+	
+	<div class="row" style="margin-bottom: 40px;">
+		<div class="col">
+			<img class="logo" src="view/images/logo_catfish.png" />
+		</div>
+	</div>
+	
 	<div class="row">
 		<div class="col">
 			<form id="frmLogin" method="post" action="login">
