@@ -18,6 +18,33 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['command']) ) {
 			
 		break;
 		
+		case 'cmd_setStatus' :
+			
+			//print_r ($_POST);
+			
+			if (
+				isset($_POST['status']) &&
+				in_array($_POST['status'], array(0,1)) &&
+				isset($_POST['game_id']) &&
+				is_numeric($_POST['game_id'])
+			) {
+				//$query = $db->prepare("UPDATE player_game SET player_id = :player_id AND game_id = :game_id AND status = :status");
+				$query = $db->prepare("INSERT into player_game (player_id, game_id, status) VALUES (:player_id, :game_id, :status)");
+				
+				if ($query->execute( array(":player_id" => $id, ":game_id" => $_POST['game_id'], ":status" => $_POST['status'])) ) {
+					exit(json_encode(array('result' => 'success')));
+					
+				} else {
+					exit(json_encode(array('result' => 'error')));
+				}
+				
+			}
+			
+			exit();
+			
+		break;
+		
+		
 		default :
 			exit(json_encode(array('result' => 'error')));
 		

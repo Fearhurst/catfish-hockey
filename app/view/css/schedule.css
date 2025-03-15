@@ -1,2 +1,27 @@
 @charset "UTF-8";
 
+.status {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.status-in.selected {
+	background-color: var(--color-primary);
+	color: #fff;
+}
+
+.status-out.selected {
+	background-color: var(--color-error);
+	color: #fff;
+}
+
+.button:hover, [type=button]:hover, [type=reset]:hover, [type=submit]:hover, button:hover {
+	opacity: 1;
+}
+
+.button:active:not(:disabled), [type=button]:active:not(:disabled), [type=reset]:active:not(:disabled), [type=submit]:active:not(:disabled), button:active:not(:disabled) {
+	transform: none;
+}
+
+.button, [type=button], [type=reset], [type=submit], button {
+	transition: none;
+}

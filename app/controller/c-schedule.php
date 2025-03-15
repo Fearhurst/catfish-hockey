@@ -15,6 +15,9 @@ $query = $db->prepare("SELECT * FROM game ORDER BY game_time LIMIT 50 OFFSET 1")
 $query->execute();
 $upcomingGames = $query->fetchAll(PDO::FETCH_ASSOC);
 
+$query = $db->prepare("SELECT game_id, status FROM player_game WHERE player_id = :player_id");
+$query->execute( array(":player_id" => $id) );
+$playerGames = $query->fetchAll(PDO::FETCH_KEY_PAIR);
 
 // Load the view
 require ($cfg['server_path'] . '/view/v-schedule.php');
