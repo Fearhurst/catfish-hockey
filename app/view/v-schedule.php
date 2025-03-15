@@ -11,13 +11,13 @@
 			<div class="game-location"><?php echo( $nextGame[0]['game_location'] ); ?></div>
 		</div>
 		<div class="status-container is-center">
-			<div class="status status-in button inner-pad<?php echo ( (in_array($nextGame[0]['game_id'], $playerGames) && $playerGames[$nextGame[0]['game_id']] == 1 ) ? ' selected' : '' ); ?>">
+			<div class="status status-in button inner-pad<?php echo ( (array_key_exists($nextGame[0]['game_id'], $playerGames) && $playerGames[$nextGame[0]['game_id']] == 1 ) ? ' selected' : '' ); ?>">
 				<span class="button-text pull-left">
 					<span class="checkmark">⎦</span>IN
 				</span>
 				<span class="player-count pull-right">0</span>
 			</div>
-			<div class="status status-out button inner-pad<?php echo ( (in_array($nextGame[0]['game_id'], $playerGames) && $playerGames[$nextGame[0]['game_id']] == 0 ) ? ' selected' : '' ); ?>">
+			<div class="status status-out button inner-pad<?php echo ( (array_key_exists($nextGame[0]['game_id'], $playerGames) && $playerGames[$nextGame[0]['game_id']] == 0 ) ? ' selected' : '' ); ?>">
 				<span class="button-text pull-left">
 					<span class="x">✕</span>OUT
 				</span>
