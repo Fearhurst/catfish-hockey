@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
-	$('.attendance').on('click', function() {
+/*
+	$('.status').on('click', function() {
 		
 		event.stopPropagation();
 		
@@ -10,25 +11,25 @@ $(document).ready(function() {
 			return;
 		}
 		
-		$('.attendance').removeClass('selected');
+		$('.status').removeClass('selected');
 		
 		let status;
 		let game_id = $(this).parents('.card').attr('data-gameid');
 		
-		if ( btn.hasClass('attendance-in') ) {
-			attendance = 'in';
+		if ( btn.hasClass('status-in') ) {
+			status = 1;
 		}
 		
-		if ( btn.hasClass('attendance-out') ) {
-			attendance = 'out';
+		if ( btn.hasClass('status-out') ) {
+			status = 0;
 		}
 		
 		$.ajax({
 			type: 'POST',
 			url: 'ajax',
 			data: {
-				command: 'cmd_setAttendance',
-				attendance: attendance,
+				command: 'cmd_setStatus',
+				status: status,
 				game_id: game_id
 			}
 		}).done(function(msg) {
@@ -46,5 +47,6 @@ $(document).ready(function() {
 		let game_id = $(this).attr('data-gameid');
 		window.location.href = 'game?id=' + game_id;
 	});
-	
+*/
+
 });

@@ -18,11 +18,11 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['command']) ) {
 			
 		break;
 		
-		case 'cmd_setStatus' :
+		case 'cmd_setAttendance' :
 			
 			if (
-				isset($_POST['status']) &&
-				in_array($_POST['status'], array(0,1)) &&
+				isset($_POST['attendance']) &&
+				in_array($_POST['attendance'], array('in','out')) &&
 				isset($_POST['game_id']) &&
 				is_numeric($_POST['game_id'])
 			) {
@@ -34,24 +34,24 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['command']) ) {
 				
 				if (!empty($result)) {
 					// There is already a status record for this player
-					$query = $db->prepare("UPDATE player_game SET status = :status WHERE id = :id");
+					$query = $db->prepare("UPDATE player_game SET attendance = :attendance WHERE id = :id");
 					
-					if ($query->execute( array(":status" => $_POST['status'], ":id" => $result)) ) {
+					if ($query->execute( array(":attendance" => $_POST['attendance'], ":id" => $result)) ) {
 						exit(json_encode(array('result' => 'success')));
 						
 					} else {
-						exit(json_encode(array('result' => 'error')));
+						exit(json_encode(array('result' => 'error1')));
 					}
 				
 				} else {
 					// This is the first time this player has checked in for this game
-					$query = $db->prepare("INSERT into player_game (player_id, game_id, status) VALUES (:player_id, :game_id, :status)");
+					$query = $db->prepare("INSERT into player_game (player_id, game_id, attendance) VALUES (:player_id, :game_id, :attendance)");
 					
-					if ($query->execute( array(":player_id" => $id, ":game_id" => $_POST['game_id'], ":status" => $_POST['status'])) ) {
+					if ($query->execute( array(":player_id" => $id, ":game_id" => $_POST['game_id'], ":attendance" => $_POST['attendance'])) ) {
 						exit(json_encode(array('result' => 'success')));
 						
 					} else {
-						exit(json_encode(array('result' => 'error')));
+						exit(json_encode(array('result' => 'error2')));
 					}
 				
 				}

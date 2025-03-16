@@ -10,21 +10,24 @@
 			<div class="game-date"><?php echo( date('D, M d', strtotime($nextGame[0]['game_time'])) ); ?> - <?php echo( date('h:i a', strtotime($nextGame[0]['game_time'])) ); ?></div>
 			<div class="game-location"><?php echo( $nextGame[0]['game_location'] ); ?></div>
 		</div>
-		<div class="status-container is-center">
-			<div class="status status-in button inner-pad<?php echo ( (array_key_exists($nextGame[0]['game_id'], $playerGames) && $playerGames[$nextGame[0]['game_id']] == 1 ) ? ' selected' : '' ); ?>">
+		
+		<div class="duties"><span class="icon">🍺</span> <?php echo($nextGame[0]['player_firstname']); ?> <?php echo($nextGame[0]['player_lastname']); ?></div>
+		
+		<div class="attendance-container is-center">
+			<div class="attendance attendance-in button inner-pad<?php echo ( (array_key_exists($nextGame[0]['game_id'], $playerGames) && $playerGames[$nextGame[0]['game_id']] == 'in' ) ? ' selected' : '' ); ?>">
 				<span class="button-text pull-left">
 					<span class="checkmark">⎦</span>IN
 				</span>
-				<span class="player-count pull-right">0</span>
+				<span class="player-count pull-right"><?php echo $nextGameIN; ?></span>
 			</div>
-			<div class="status status-out button inner-pad<?php echo ( (array_key_exists($nextGame[0]['game_id'], $playerGames) && $playerGames[$nextGame[0]['game_id']] == 0 ) ? ' selected' : '' ); ?>">
+			<div class="attendance attendance-out button inner-pad<?php echo ( (array_key_exists($nextGame[0]['game_id'], $playerGames) && $playerGames[$nextGame[0]['game_id']] == 'out' ) ? ' selected' : '' ); ?>">
 				<span class="button-text pull-left">
 					<span class="x">✕</span>OUT
 				</span>
-				<span class="player-count pull-right">0</span>
+				<span class="player-count pull-right"><?php echo $nextGameOUT; ?></span>
 			</div>
 		</div>
-		<div class="duties"><span class="icon">🍺</span> <?php echo($nextGame[0]['player_firstname']); ?> <?php echo($nextGame[0]['player_lastname']); ?></div>
+		
 	</div>
 	<?php else : ?>
 	None...

@@ -7,7 +7,6 @@
 		<span class="player-number">#<?php echo($player['player_number']); ?></span>
 		<span class="player-name"><?php echo($player['player_firstname']); ?> <?php echo($player['player_lastname']); ?></span>
 	</div>
-	
 	<?php endforeach; ?>
 
 </div>

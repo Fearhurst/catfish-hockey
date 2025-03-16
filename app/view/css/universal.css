@@ -213,17 +213,29 @@ h3 {
 	padding: 1.5rem 2rem 2rem;
 }
 
-.status-container {
+.attendance-container {
 	margin: 1.5em 0 0 0;
 	display: flex;
+	z-index: 500;
 }
 
-.status {
+.attendance {
 	display: inline-block;
 	width: 50%;
 	text-align: left;
 	padding: 1em;
 	border-radius: 8px;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.attendance-in.selected {
+	background-color: var(--color-primary);
+	color: #fff;
+}
+
+.attendance-out.selected {
+	background-color: var(--color-error);
+	color: #fff;
 }
 
 .checkmark, .x {
@@ -271,6 +283,18 @@ h3 {
 	margin-left: 2rem;
 }
 
+.button:hover, [type=button]:hover, [type=reset]:hover, [type=submit]:hover, button:hover {
+	opacity: 1;
+}
+
+.button:active:not(:disabled), [type=button]:active:not(:disabled), [type=reset]:active:not(:disabled), [type=submit]:active:not(:disabled), button:active:not(:disabled) {
+	transform: none;
+}
+
+.button, [type=button], [type=reset], [type=submit], button {
+	transition: none;
+}
+
 .player-count {
 	border: 0;
 	border-radius: 0 8px 8px 0;
@@ -278,8 +302,10 @@ h3 {
 	padding-left: 1em;
 }
 
-/*
-.status-in {
-	background-color: var(--bg-secondary-color);
+table.striped tr:nth-of-type(1n) {
+	background-color: var(--catfish-blue-extralight);
 }
-*/
+
+table.striped tr:nth-of-type(2n) {
+	background-color: var(--catfish-blue-light);
+}
