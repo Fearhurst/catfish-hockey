@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
-
-		<title><?php echo ($pagedata['title']); ?></title>
+		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimal-ui" />
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes">
+		<title><?php echo ($pagedata['title']); ?></title>
 		<?php
 		// Include page CSS
  		getCSSmod('chota/dist/chota.min');
@@ -16,6 +17,11 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+		
+		<link rel="apple-touch-icon" sizes="180x180" href="view/images/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="view/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="view/images/favicon-16x16.png">
+		<link rel="manifest" href="site.webmanifest">
 		
 		<script>const home_url = '<?php echo ($cfg["url"]); ?>';</script>
 		
