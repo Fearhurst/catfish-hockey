@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Mar 09, 2025 at 08:49 PM
+-- Generation Time: Mar 16, 2025 at 10:34 PM
 -- Server version: 5.7.44
 -- PHP Version: 8.3.14
 
@@ -14,8 +14,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `catfish_hockey`
 --
-CREATE DATABASE IF NOT EXISTS `catfish_hockey` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `catfish_hockey`;
 
 -- --------------------------------------------------------
 
@@ -26,8 +24,19 @@ USE `catfish_hockey`;
 CREATE TABLE `game` (
   `game_id` int(10) UNSIGNED NOT NULL,
   `game_time` datetime NOT NULL,
-  `game_beer_player_id` int(10) UNSIGNED NOT NULL
+  `game_opponent` varchar(100) DEFAULT NULL,
+  `game_location` varchar(100) DEFAULT NULL,
+  `game_home` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
+  `game_beer_player_id` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `game`
+--
+
+INSERT INTO `game` (`game_id`, `game_time`, `game_opponent`, `game_location`, `game_home`, `game_beer_player_id`) VALUES
+(1, '2025-03-18 22:30:00', 'Healthy Scratches', 'Ford PC 2', 1, 1),
+(2, '2025-04-01 22:15:00', 'Penguins', 'Rinx 3', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -39,6 +48,7 @@ CREATE TABLE `player` (
   `player_id` int(10) UNSIGNED NOT NULL,
   `player_firstname` varchar(50) NOT NULL,
   `player_lastname` varchar(100) NOT NULL,
+  `player_position` varchar(2) DEFAULT NULL,
   `player_number` tinyint(3) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -46,9 +56,31 @@ CREATE TABLE `player` (
 -- Dumping data for table `player`
 --
 
-INSERT INTO `player` (`player_id`, `player_firstname`, `player_lastname`, `player_number`) VALUES
-(1, 'Chris', 'Fairhurst', 5),
-(2, 'Lucas', 'Price', 81);
+INSERT INTO `player` (`player_id`, `player_firstname`, `player_lastname`, `player_position`, `player_number`) VALUES
+(1, 'Chris', 'Fairhurst', 'RW', 5),
+(2, 'Lucas', 'Price', 'LW', 81),
+(3, 'Leo', 'Abramovich', 'C', 9);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `player_game`
+--
+
+CREATE TABLE `player_game` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `player_id` int(10) UNSIGNED NOT NULL,
+  `game_id` int(10) UNSIGNED NOT NULL,
+  `attendance` enum('in','out') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `player_game`
+--
+
+INSERT INTO `player_game` (`id`, `player_id`, `game_id`, `attendance`) VALUES
+(1, 1, 1, 'in'),
+(2, 2, 1, 'out');
 
 -- --------------------------------------------------------
 
@@ -75,7 +107,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `username`, `status`, `verified`, `resettable`, `roles_mask`, `registered`, `last_login`, `force_logout`) VALUES
-(1, 'cfairhurst@gmail.com', '$2y$10$Zrc9vXVeaSdpBoj5yt/aoutVj6Qw0HxXHEFZc7zz91OKA/UlN2UwS', NULL, 0, 1, 1, 0, 1741552966, 1741553250, 0);
+(1, 'cfairhurst@gmail.com', '$2y$10$Zrc9vXVeaSdpBoj5yt/aoutVj6Qw0HxXHEFZc7zz91OKA/UlN2UwS', NULL, 0, 1, 1, 0, 1741552966, 1742164226, 0);
 
 -- --------------------------------------------------------
 
@@ -142,7 +174,12 @@ CREATE TABLE `users_remembered` (
 --
 
 INSERT INTO `users_remembered` (`id`, `user`, `selector`, `token`, `expires`) VALUES
-(2, 1, 'fq-pts_vkOLhLDlE36HGf58j', '$2y$10$BRFgMqTzF.jQxS5ryVDEOO5vM/YXvvFRvkDVeYfYY61YYhx5nr0uW', 1773110850);
+(7, 1, 'gHz2jU8zk0AQKOj7OnvllFV6', '$2y$10$WEq4DWLVtFwW0/UVUK6bZ.g46dqGcuUrtMy2g8m8nd5FpplO4dDK.', 1773228030),
+(8, 1, 'x_oROcf3DmXK616rT6BGTRvl', '$2y$10$H3cF8KrVeCMFClkjaogYLePCjUfna4rM2D2Rma2StrvEgfAVD2F.G', 1773228226),
+(12, 1, 'Ol6xeWcknAoxDxMTDbGU7U2c', '$2y$10$Y65MLBNWqlfKo6H5yCuFk.4NlRlk5SBMQmFUUc4AJOvSijwv6L2G.', 1773395813),
+(13, 1, 'h6DjLWdxV6HU387aKRsv0T81', '$2y$10$lMS773zWiO6PHxieNKuFC.rkHsEzrQR5uBfSr20vVpPkdpMwOO/rW', 1773466183),
+(14, 1, 'Li-INECEjDSQ0NvZO7HyEKCq', '$2y$10$uVno2VSq1EiV0IswXu/TvO49NjJxnNS5bmTD9XmszxXfbhwGbGR.C', 1773566356),
+(15, 1, 'r9xmaMBKzVlrhjGZHSMpu4BO', '$2y$10$X4MNK0Y2bTH0O2SPuE693e5aJPjdRFZGzv0qMPsX6PqUJdxZOumWW', 1773721826);
 
 -- --------------------------------------------------------
 
@@ -176,10 +213,11 @@ CREATE TABLE `users_throttling` (
 --
 
 INSERT INTO `users_throttling` (`bucket`, `tokens`, `replenished_at`, `expires_at`) VALUES
-('ejWtPDKvxt-q7LZ3mFjzUoIWKJYzu47igC8Jd9mffFk', 71.0786, 1741553249, 1742093249),
+('ejWtPDKvxt-q7LZ3mFjzUoIWKJYzu47igC8Jd9mffFk', 74, 1742164225, 1742704225),
 ('CUeQSH1MUnRpuE3Wqv_fI3nADvMpK_cg6VpYK37vgIw', 4, 1741552966, 1741984966),
 ('Jjl8HEbTSJpZBWoyXOajJXqciuUdngUbah061jwhliE', 19, 1741553134, 1741589134),
-('aIAy-OK3K2AGwC-58Jxr8f4z7JJGD7KQmwDBoORNQdA', 499, 1741553134, 1741725934);
+('aIAy-OK3K2AGwC-58Jxr8f4z7JJGD7KQmwDBoORNQdA', 499, 1741553134, 1741725934),
+('kEbykVeYjXzlwRMRyViUTXh8oub9hQ3h6OrrDXV-IeY', 74, 1741670625, 1742210625);
 
 --
 -- Indexes for dumped tables
@@ -196,6 +234,12 @@ ALTER TABLE `game`
 --
 ALTER TABLE `player`
   ADD PRIMARY KEY (`player_id`);
+
+--
+-- Indexes for table `player_game`
+--
+ALTER TABLE `player_game`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -259,13 +303,19 @@ ALTER TABLE `users_throttling`
 -- AUTO_INCREMENT for table `game`
 --
 ALTER TABLE `game`
-  MODIFY `game_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `game_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `player`
 --
 ALTER TABLE `player`
-  MODIFY `player_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `player_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `player_game`
+--
+ALTER TABLE `player_game`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -295,7 +345,7 @@ ALTER TABLE `users_otps`
 -- AUTO_INCREMENT for table `users_remembered`
 --
 ALTER TABLE `users_remembered`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `users_resets`
