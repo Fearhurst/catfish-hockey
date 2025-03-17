@@ -240,6 +240,7 @@ h3 {
 	background-color: rgba(var(--catfish-blue-dark-rgb), .5);
 	border-radius: 12px;
 	padding: 1.5rem 2rem 2rem;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .attendance-container {
