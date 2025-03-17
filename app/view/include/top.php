@@ -29,8 +29,21 @@
 
 	<body>
 		
-		<header class="text-justify" style="text-align: center;">
-
+		<header>
+		
+			<div id="hamburger">
+				<input id="menu__toggle" type="checkbox" />
+				<label class="menu__btn" for="menu__toggle"></label>
+				<ul class="menu__box">
+					<li><a class="menu__item" href="schedule">Schedule</a></li>
+					<li><a class="menu__item" href="roster">Roster</a></li>
+					<li><a class="menu__item" href="#">Beer</a></li>
+					<li><hr /></li>
+					<li><a class="menu__item" href="logout">Logout</a></li>
+				</ul>
+			</div>
+		
+<!--
 			<div id="hamburger">
 				<input id="menu__toggle" type="checkbox" />
 				<label class="menu__btn" for="menu__toggle">
@@ -44,7 +57,8 @@
 					<li><a class="menu__item" href="logout">Logout</a></li>
 				</ul>
 			</div>
-			  
+-->
+
 			<span class="header-title">Catfish Hockey</span>
 
 		</header>
