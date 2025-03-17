@@ -36,7 +36,7 @@
 				<?php foreach ($in as $player) :?>
 				<tr>
 					<td>
-						<span class="player-number">#<?php echo($player['player_number']); ?></span>
+						<span class="player-number in"><?php echo($player['player_number']); ?></span>
 						<span class="player-name"><?php echo($player['player_firstname']); ?> <?php echo($player['player_lastname']); ?></span>
 					</td>
 				</tr>
@@ -53,7 +53,7 @@
 				<?php foreach ($out as $player) :?>
 				<tr>
 					<td>
-						<span class="player-number">#<?php echo($player['player_number']); ?></span>
+						<span class="player-number out"><?php echo($player['player_number']); ?></span>
 						<span class="player-name"><?php echo($player['player_firstname']); ?> <?php echo($player['player_lastname']); ?></span>
 					</td>
 				</tr>
@@ -70,7 +70,7 @@
 				<?php foreach ($unknown as $player) :?>
 				<tr>
 					<td>
-						<span class="player-number">#<?php echo($player['player_number']); ?></span>
+						<span class="player-number unknown"><?php echo($player['player_number']); ?></span>
 						<span class="player-name"><?php echo($player['player_firstname']); ?> <?php echo($player['player_lastname']); ?></span>
 					</td>
 				</tr>

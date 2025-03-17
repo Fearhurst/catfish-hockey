@@ -12,7 +12,7 @@ $(document).ready(function() {
 		
 		$('.attendance').removeClass('selected');
 		
-		let status;
+		let attendance;
 		let game_id = $(this).parents('.card').attr('data-gameid');
 		
 		if ( btn.hasClass('attendance-in') ) {
