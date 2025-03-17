@@ -7,7 +7,7 @@ $required_css = array('schedule');
 $required_js = array('schedule' => 1);
 $required_modal = array();
 
-$query = $db->prepare("SELECT * FROM game G, player P WHERE G.game_beer_player_id = P.player_id ORDER BY game_time LIMIT 1");
+$query = $db->prepare("SELECT G.game_id, G.game_time, G.game_opponent, G.game_location, G.game_home, P.player_firstname AS beer_player_firstname, P.player_lastname AS beer_player_lastname FROM game G, player P WHERE G.game_beer_player_id = P.player_id ORDER BY game_time LIMIT 1");
 $query->execute();
 $nextGame = $query->fetchAll(PDO::FETCH_ASSOC);
 

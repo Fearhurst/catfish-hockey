@@ -11,7 +11,8 @@
 			<div class="game-location"><?php echo( $nextGame[0]['game_location'] ); ?></div>
 		</div>
 		
-		<div class="duties"><span class="icon">🍺</span> <?php echo($nextGame[0]['player_firstname']); ?> <?php echo($nextGame[0]['player_lastname']); ?></div>
+		<?php $beerduty = $nextGame[0]['beer_player_firstname'] . " " . $nextGame[0]['beer_player_lastname']; ?>
+		<div class="duties"><span class="icon">🍺</span><?php echo( $beerduty == " " || empty($beerduty) ? ' Holy shit! Nobody\'s on beer!' : " " . $beerduty ); ?></div>
 		
 		<div class="attendance-container is-center">
 			<div class="attendance attendance-in button inner-pad<?php echo ( (array_key_exists($nextGame[0]['game_id'], $playerGames) && $playerGames[$nextGame[0]['game_id']] == 'in' ) ? ' selected' : '' ); ?>">

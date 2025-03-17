@@ -9,7 +9,8 @@
 			<div class="game-location"><?php echo( $game[0]['game_location'] ); ?></div>
 		</div>
 		
-		<div class="duties"><span class="icon">🍺</span> <?php echo($game[0]['player_firstname']); ?> <?php echo($game[0]['player_lastname']); ?></div>
+		<?php $beerduty = $game[0]['beer_player_firstname'] . " " . $game[0]['beer_player_lastname']; ?>
+		<div class="duties"><span class="icon">🍺</span><?php echo( $beerduty == " " || empty($beerduty) ? ' Holy shit! Nobody\'s on beer!' : " " . $beerduty ); ?></div>
 		
 		<div class="attendance-container is-center">
 			<div class="attendance attendance-in button inner-pad<?php echo ( array_key_exists($id, $in) ? ' selected' : '' ); ?>">

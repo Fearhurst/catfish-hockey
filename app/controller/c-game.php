@@ -7,7 +7,8 @@ $required_css = array('game');
 $required_js = array('game' => 1);
 $required_modal = array();
 
-$query = $db->prepare("SELECT * FROM game G LEFT JOIN player P ON G.game_beer_player_id = P.player_id WHERE G.game_id = :game_id LIMIT 1");
+$query = $db->prepare("SELECT G.game_id, G.game_time, G.game_opponent, G.game_location, G.game_home, P.player_firstname AS beer_player_firstname, P.player_lastname AS beer_player_lastname FROM game G LEFT JOIN player P ON G.game_beer_player_id = P.player_id WHERE G.game_id = :game_id LIMIT 1");
+
 $query->execute( array(":game_id" => $_GET['id']) );
 $game = $query->fetchAll(PDO::FETCH_ASSOC);
 
