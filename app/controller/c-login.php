@@ -17,7 +17,7 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
 		$rememberDuration = (int) (60 * 60 * 24 * 365.25);
 		$auth->login($_POST['email'], $_POST['password'], $rememberDuration);
 		
-		header('Location: home');
+		header('Location: schedule');
 		exit();
 	
 	} catch (\Delight\Auth\InvalidEmailException $e) {
