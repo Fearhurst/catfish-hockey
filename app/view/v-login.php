@@ -24,20 +24,27 @@
 					</div>
 				</div>
 				
-				<div class="row">
+				<div class="row" style="margin-top: 1em;">
 					<div class="col">
-						<input type="submit" id="submit" name="submit" class="button" value="Login" />
-						<?php
-						if (isset($error) && $error != NULL) {
-							echo ('<span class="error">' . $error . '</span>');
-						}
-						?>
+						<input type="submit" id="login-submit" name="submit" class="button" value="Login" />
+						<div class="error" style="height: 1em; margin-top: 1em;">
+							<?php
+							if (isset($error) && $error != NULL) {
+								echo ($error);
+							}
+							?>
+						</div>
 					</div>
 				</div>
 				
-
+				<div class="row" style="margin-top: 30px;">
+					<div class="col">
+						<a href="forgot">Forgot your password?</a>
+					</div>
+				</div>
 			
 			</form>
+			
 		</div>
 	</div>
 

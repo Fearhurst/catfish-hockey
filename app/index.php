@@ -7,7 +7,7 @@ require __DIR__ . '/vendor/autoload.php';
 require ("functions.php");
 require ("init.php");
 
-$auth = new \Delight\Auth\Auth($db);
+$auth = new \Delight\Auth\Auth($db, null, null, false);
 
 // Figure out the page
 if ( isset($_GET['p']) && !empty($_GET['p']) ) {

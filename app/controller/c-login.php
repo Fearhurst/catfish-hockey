@@ -2,14 +2,11 @@
 
 // Required CSS and JS
 $required_css = array('login');
-$required_js = array();
+$required_js = array('login' => 1);
 $required_modal = array();
 
 if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
 	
-	//$userId = $auth->register("cfairhurst@gmail.com", $_POST['password'], null);
-	//exit();
-
 	$error = NULL;
 	
 	try {
@@ -33,7 +30,7 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
 		$error = 'Too many requests';
 	
 	}
-
+	
 }
 
 // Load the view
