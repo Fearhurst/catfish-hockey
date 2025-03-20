@@ -71,7 +71,7 @@
 						
 						<div class="row">
 							<div class="col">
-								<p>Enter your email, and I'll send you a link&nbsp;to&nbsp;reset&nbsp;it.</p>
+								<p>Enter your email and I'll send you a link&nbsp;to&nbsp;reset&nbsp;it.</p>
 							</div>
 						</div>
 						
