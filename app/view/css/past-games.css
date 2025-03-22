@@ -11,3 +11,29 @@ h3 {
 .card {
 	padding-bottom: 1rem;
 }
+
+.duties {
+	margin-top: 0;
+}
+
+.outcome {
+	border-radius: 50%;
+	width: 45px;
+	height: 45px;
+	justify-content: center;
+	display: flex;
+	align-items: center;
+}
+
+.outcome.win {
+	background-color: var(--color-primary);
+}
+
+.outcome.loss {
+	background-color: var(--color-error);
+}
+
+.outcome.tie {
+	background-color: var(--color-lightGrey);
+	color: var(--color-darkGrey);
+}

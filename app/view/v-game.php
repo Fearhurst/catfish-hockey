@@ -27,7 +27,24 @@
 				<span class="player-count pull-right"><?php echo(count($out)); ?></span>
 			</div>
 		</div>
+		
+		<?php else : ?>
+		
+		<div class="row">
+			<div class="col"><hr /></div>
+		</div>
+
+		<div class="row team score">
+			<div class="col team-name">Catfish Tapas</div>
+			<div class="col team-score text-right"><?php echo($game[0]['catfish_score']); ?></div>
+		</div>
+		<div class="row team score">
+			<div class="col team-name"><?php echo($game[0]['game_opponent']); ?></div>
+			<div class="col team-score text-right"><?php echo($game[0]['opponent_score']); ?></div>
+		</div>
+		
 		<?php endif; ?>
+		
 		
 	</div>
 	
