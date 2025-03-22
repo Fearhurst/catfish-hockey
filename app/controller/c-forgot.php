@@ -13,7 +13,7 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
 
 		try {
 			$auth->resetPasswordAndSignIn($_POST['selector'], $_POST['token'], $_POST['password']);
-			$reset_step = 'completę';
+			$reset_step = 'complete';
 			
 		} catch (\Delight\Auth\InvalidSelectorTokenPairException $e) {
 		    $error = 'Invalid token';
@@ -39,13 +39,13 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
 			$auth->forgotPassword($_POST['email'], function ($selector, $token) use($reset_step) {
 				
 				global $cfg;
-				global $reset_step;
+				//global $reset_step;
 				
 				$url = $cfg['url'] . '/forgot?s=' . \urlencode($selector) . '&t=' . \urlencode($token);
-				echo ($url);
+				//echo ($url);
 				
 				// Email the URL
-				$postmark_result = sendPasswordResetEmail('admin@catfishhockey.com', $url); //$_POST['email']
+				$postmark_result = sendPasswordResetEmail($_POST['email'], $url);
 				//die ($postmark_result);
 				
 				$reset_step = 'link';
