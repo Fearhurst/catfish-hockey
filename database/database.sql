@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Mar 16, 2025 at 10:34 PM
+-- Generation Time: Mar 22, 2025 at 05:45 AM
 -- Server version: 5.7.44
 -- PHP Version: 8.3.14
 
@@ -27,16 +27,20 @@ CREATE TABLE `game` (
   `game_opponent` varchar(100) DEFAULT NULL,
   `game_location` varchar(100) DEFAULT NULL,
   `game_home` tinyint(1) UNSIGNED NOT NULL DEFAULT '1',
-  `game_beer_player_id` int(10) UNSIGNED DEFAULT NULL
+  `game_beer_player_id` int(10) UNSIGNED DEFAULT NULL,
+  `catfish_score` tinyint(3) UNSIGNED NOT NULL,
+  `opponent_score` tinyint(3) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `game`
 --
 
-INSERT INTO `game` (`game_id`, `game_time`, `game_opponent`, `game_location`, `game_home`, `game_beer_player_id`) VALUES
-(1, '2025-03-18 22:30:00', 'Healthy Scratches', 'Ford PC 2', 1, 1),
-(2, '2025-04-01 22:15:00', 'Penguins', 'Rinx 3', 0, NULL);
+INSERT INTO `game` (`game_id`, `game_time`, `game_opponent`, `game_location`, `game_home`, `game_beer_player_id`, `catfish_score`, `opponent_score`) VALUES
+(1, '2025-03-18 22:30:00', 'Healthy Scratches', 'Ford PC 2', 1, 1, 6, 5),
+(2, '2025-04-01 22:15:00', 'Penguins', 'Rinx 3', 0, NULL, 0, 0),
+(3, '2025-04-08 19:30:00', '2nd B Group', 'Ford PC 2', 1, NULL, 0, 0),
+(4, '2025-04-15 21:30:00', 'Winner G8', 'Rinx 2', 1, NULL, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -80,7 +84,8 @@ CREATE TABLE `player_game` (
 
 INSERT INTO `player_game` (`id`, `player_id`, `game_id`, `attendance`) VALUES
 (1, 1, 1, 'in'),
-(2, 2, 1, 'out');
+(2, 2, 1, 'out'),
+(3, 1, 2, 'out');
 
 -- --------------------------------------------------------
 
@@ -107,7 +112,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `username`, `status`, `verified`, `resettable`, `roles_mask`, `registered`, `last_login`, `force_logout`) VALUES
-(1, 'cfairhurst@gmail.com', '$2y$10$Zrc9vXVeaSdpBoj5yt/aoutVj6Qw0HxXHEFZc7zz91OKA/UlN2UwS', NULL, 0, 1, 1, 0, 1741552966, 1742164226, 0);
+(1, 'cfairhurst@gmail.com', '$2y$10$SM9oo3tm0..DURRRvadNi.IwkV0f.5LJUbrO6NBaSfZXXEiOlPtmC', NULL, 0, 1, 1, 0, 1741552966, 1742617412, 5);
 
 -- --------------------------------------------------------
 
@@ -174,12 +179,7 @@ CREATE TABLE `users_remembered` (
 --
 
 INSERT INTO `users_remembered` (`id`, `user`, `selector`, `token`, `expires`) VALUES
-(7, 1, 'gHz2jU8zk0AQKOj7OnvllFV6', '$2y$10$WEq4DWLVtFwW0/UVUK6bZ.g46dqGcuUrtMy2g8m8nd5FpplO4dDK.', 1773228030),
-(8, 1, 'x_oROcf3DmXK616rT6BGTRvl', '$2y$10$H3cF8KrVeCMFClkjaogYLePCjUfna4rM2D2Rma2StrvEgfAVD2F.G', 1773228226),
-(12, 1, 'Ol6xeWcknAoxDxMTDbGU7U2c', '$2y$10$Y65MLBNWqlfKo6H5yCuFk.4NlRlk5SBMQmFUUc4AJOvSijwv6L2G.', 1773395813),
-(13, 1, 'h6DjLWdxV6HU387aKRsv0T81', '$2y$10$lMS773zWiO6PHxieNKuFC.rkHsEzrQR5uBfSr20vVpPkdpMwOO/rW', 1773466183),
-(14, 1, 'Li-INECEjDSQ0NvZO7HyEKCq', '$2y$10$uVno2VSq1EiV0IswXu/TvO49NjJxnNS5bmTD9XmszxXfbhwGbGR.C', 1773566356),
-(15, 1, 'r9xmaMBKzVlrhjGZHSMpu4BO', '$2y$10$X4MNK0Y2bTH0O2SPuE693e5aJPjdRFZGzv0qMPsX6PqUJdxZOumWW', 1773721826);
+(25, 1, 'vkItGi6dASC6BKmdDfJ82v01', '$2y$10$QYHgArd4o3jTC1GpzSWV.esPXG1Zcr8Rm9BwMn.YeTnw96fzYb8m2', 1774175013);
 
 -- --------------------------------------------------------
 
@@ -194,6 +194,51 @@ CREATE TABLE `users_resets` (
   `token` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL,
   `expires` int(10) UNSIGNED NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users_resets`
+--
+
+INSERT INTO `users_resets` (`id`, `user`, `selector`, `token`, `expires`) VALUES
+(1, 1, 'tcsUVHAgqf-SzH2vd4rZ', '$2y$10$xM8dGJfRR1G4G3Ayeyju3O0eX.uGFmGo40zbmKtlduBXBgot0Hjhu', 1742453877),
+(2, 1, 'BW3mjLQlVzhGDLCS6oxi', '$2y$10$WIaArpbbkAIoVD3ZUq6XEOjeUo9ypDt3hp9Qy6/za6GWpeddEyXTm', 1742453910),
+(3, 1, 't4RwAlyF3iMv9W1uxZXC', '$2y$10$UmcE/LhlzvlRGMceFhcFh.pzT09vqB4rY6CwPX8WEvpPUWYYOVvpW', 1742455266),
+(4, 1, '7wkx1GOJKdktfXXsFCon', '$2y$10$hVgbFaMBa4VIlR.gQCTimerLpTiP9UkrUZU9ESKJzkNKX8c0C5Ova', 1742455312),
+(5, 1, 'dAjFxIafyd2nbZ9QbGyx', '$2y$10$bFoFLXq/rnE7n1Y5okFVsOBkzhm.a7VujBdISXPvI3vTj97.s36HW', 1742455361),
+(6, 1, 'mq2hndtoD71HlkvFk_EF', '$2y$10$OnvnQaXzTtND8xBFvzEe9.Y2qNGRQJu2KiQOAEeN2ahaOLd.srPkG', 1742455454),
+(7, 1, 'SifW17ai7QvopyCgDjfM', '$2y$10$PFzEKd6JmwT/CIOCM2inI.RkN3CyxtwNFbvK8G2X/8APWoVl0rddW', 1742455606),
+(8, 1, 'l_uqETCvN2knDBN_qtW8', '$2y$10$djEYjh3hB4gnGnXrsDyx5uJEmJMJuNtzv4eJS5tzgTHcHzA8n7o3G', 1742455620),
+(9, 1, 'IuOyhd22pc1YsQlJg5aU', '$2y$10$6zzqfoAA6fFDVIp9DbF2u.Lp0zvmlvh/I.vsSUIHVP29a.lSiGMhK', 1742456811),
+(10, 1, 'kjxR1e4O-lFXDd65WUKM', '$2y$10$PZDCGsG.EGzk9Fo5LkDJ4uKlt2UwcIxxxxsTKdaq6O5adcnyQJq7e', 1742460278),
+(11, 1, 'cI-mSSBTjXV-lW4hjThE', '$2y$10$4VAMcrqWRxGCytXg9qlvkeKt.9yaxIi/bjBDpxckuwsoPbKoPMbgK', 1742460374),
+(12, 1, 'dFdBpmeznaFaNNJSZuZ3', '$2y$10$BBlGONCe1XKbnX/BrLySPOhUrW1nlSaiOQd5/OarZfdyHitYiCvXu', 1742460461),
+(13, 1, 'c9eOrxDwtetPRd231XD4', '$2y$10$VWfKdKA2IgIlH.IhlK2zaef5NfnnVevtuq27GUwUw6Bxtq73Qf9fC', 1742460555),
+(14, 1, 'PH-u7fdgMdC-aKjTnwzx', '$2y$10$ew90EWKGlFS3Ey58ckmkvenP9whjH43/5ugAH8H1kgc9EtZTxwtsS', 1742460674),
+(15, 1, 'cyTwUazVmLH8PC8P5F27', '$2y$10$cOdBB.MpswjBrGFcSgGmL.wF33aR3t9Oeqsf2bbLroa3k3rZvI8Fm', 1742460933),
+(16, 1, '5lyDKYCesU1nv6VNbQe_', '$2y$10$rjlRd3jnsLjQ.T.NCj7E5.q1nOj8WWtyAYp/TLTHh2xxiYU9.6EbS', 1742461207),
+(17, 1, 'aRV4OjeI2Qe_faFma9St', '$2y$10$gbMSGYWEu0wd.r19dqDZO.vOYdO6AxrgrWFzLqVHiSgrrXY58wV3.', 1742461288),
+(18, 1, 'Q6DdGM-3dSKOO4I8M_5E', '$2y$10$L7afIVVoixBRWoJIwWnz4OEzrLnG04q988EJsfLJA9dwYC3xiYIvC', 1742461442),
+(19, 1, 'fisMTyVImdERIjN_2Joy', '$2y$10$uJ3UWTTYi8vfdt2niSNe9u95kZJWWozLV4n3ti48K2A5RFL2c2Jq6', 1742461562),
+(20, 1, 'geUCtTSEgYrrJfmCfCjr', '$2y$10$rJ29jZvm.0swyfftDGQSQeMi6M.I3HhsRXEjHyIP8Ybbr6ZdPa58q', 1742461575),
+(21, 1, 'pO4SRzxCgBLp-O6x2oX1', '$2y$10$doOS4x/aM/HdlcaQDsb3HO0KWrIrjTaTJeu7qEHtjFQCXQL11x8OO', 1742461799),
+(22, 1, 'MZlNoQRy9J3Y7JFrvYG1', '$2y$10$mJqZSs2Ir.v6hVjoBcqQTO7F244tNTzXtf7XiwxC03WAsC1rShOga', 1742461810),
+(23, 1, 'm8sTmk2m5pKYpcmGNEzK', '$2y$10$OMm/UP64fuugvWTFzfRn4udCX4ExZ6YeF.ocJNwgIb66izavFPYRK', 1742461829),
+(24, 1, 'BnBZ_O4LXb9YDZ97X2EK', '$2y$10$FrhkP8Zbi1TSpfHJL7Y6fOEsOBufigvpKKqzx4k4w5eLcs3FgthuS', 1742461843),
+(25, 1, 'WdvX7sL-VszP0dH8SBTE', '$2y$10$RSO.pyPn2EI7MixeZRI/Aut2gdItZe5D7PJ/9mIoi7UgomUYWkSqi', 1742463911),
+(26, 1, 'd5LKSqBnfO3OB492HqRp', '$2y$10$9QfFQsCvNyXGHy4brZ0hLOumJswXXU5vivuBuBSgUThGy2HED9N0W', 1742463952),
+(27, 1, '1FGMU58954idSh61Fg3V', '$2y$10$VrQY0jlXKvenXyis6hLn0euFcbSdP8BV4L57kSUFpNMFvvP4VHx6y', 1742464238),
+(28, 1, 'v7Tg9D3wvuoxpgidmtSH', '$2y$10$QTYeXJCTKf6Gc7Ra5UFXQ.xyGimWxBZbBzwbaMhls5nY202XwUBri', 1742464284),
+(31, 1, 'Ueh9evoT99Y8LdbxtpUp', '$2y$10$hqAX4A1vLagVC.c/38lUt.kcZVzgOjOS2UbOQKwjUkJRh/yfJstrK', 1742465601),
+(32, 1, 'ZXzMXR3u5hXT2haPji8Y', '$2y$10$vNOTifvrJLJ6ONWGpa/AE.4NI4PWByuoclap1bSJDiUwcDCqU99YG', 1742465606),
+(33, 1, 'LT1OBDDaUy_niGGLRb2a', '$2y$10$P73YwA5X.3OCd6hMdBy6NuCZOKarKQGArfQMOJqgzZi6aTboBcweu', 1742465645),
+(34, 1, 'wlVCYqhnOeHmynEK2axq', '$2y$10$QF/eAyQP.k8hBP3Ypo1iLOJSxlmxoPGqHmIw.SKHoMDMYmYllfFAW', 1742465680),
+(35, 1, 'ejO3vQnqzF64uEjHK7mf', '$2y$10$0CJuRboUQgf/KHGRul1HM.7XBYzyKqPNfpaFSPYCe56lqTtwKAUnS', 1742465698),
+(36, 1, '5kBckW32BlyWJe8D41Kp', '$2y$10$ZMJEjsyn0.zJNWWJNSvVV.Hvgq33pU/WUMCdmTPpdTx5oIfdQ8OTu', 1742465727),
+(37, 1, 'fEn9MJRQln6vjRmVquxs', '$2y$10$m7Je9703NisAg4khN/4cv.S31F3cabkeUDs3ttTXu1Fa16g/n92Ta', 1742468231),
+(38, 1, 'ORLsWkEt-pwhsX2ECWbp', '$2y$10$CnW/.gph6mzHB0UrZ7CMh.XrW.tS0ulWUSYiwI1KpH4YLHTPG1IEW', 1742468323),
+(39, 1, 'tebNTVbYrkNQObGkR2yi', '$2y$10$CeOmj5nLUbEomkZ5zPE87.qwteBQgyOuK7dXvTdf1CwLbx43nwbUC', 1742468399),
+(40, 1, 'mANH0dT2pPmvhOY_kg7B', '$2y$10$hdHReQeOB.YufQ02/7jpVe8zCcCAEviIP8wOdNBB.Z79LnkG0LbpS', 1742468457),
+(41, 1, '1zynjAUjEfYRZIfVTTut', '$2y$10$CVDbldg1L6/4yd8.yD0T.ec7KLM/s7oT6KwdJ5jcC5AlBwzn1ihtG', 1742468534);
 
 -- --------------------------------------------------------
 
@@ -213,11 +258,13 @@ CREATE TABLE `users_throttling` (
 --
 
 INSERT INTO `users_throttling` (`bucket`, `tokens`, `replenished_at`, `expires_at`) VALUES
-('ejWtPDKvxt-q7LZ3mFjzUoIWKJYzu47igC8Jd9mffFk', 74, 1742164225, 1742704225),
+('ejWtPDKvxt-q7LZ3mFjzUoIWKJYzu47igC8Jd9mffFk', 66.4767, 1742433353, 1742973353),
 ('CUeQSH1MUnRpuE3Wqv_fI3nADvMpK_cg6VpYK37vgIw', 4, 1741552966, 1741984966),
 ('Jjl8HEbTSJpZBWoyXOajJXqciuUdngUbah061jwhliE', 19, 1741553134, 1741589134),
 ('aIAy-OK3K2AGwC-58Jxr8f4z7JJGD7KQmwDBoORNQdA', 499, 1741553134, 1741725934),
-('kEbykVeYjXzlwRMRyViUTXh8oub9hQ3h6OrrDXV-IeY', 74, 1741670625, 1742210625);
+('kEbykVeYjXzlwRMRyViUTXh8oub9hQ3h6OrrDXV-IeY', 74, 1741670625, 1742210625),
+('rLATZfaJDZw7SVWxt-1hI19daCVBXEsE61dIUH_QEy4', 6.00022, 1742432310, 1744851510),
+('ch_sJnjaY4eRJE6khGJMTmd4i_cvc21dFkdNj1I1G2I', 6.00022, 1742432310, 1744851510);
 
 --
 -- Indexes for dumped tables
@@ -303,7 +350,7 @@ ALTER TABLE `users_throttling`
 -- AUTO_INCREMENT for table `game`
 --
 ALTER TABLE `game`
-  MODIFY `game_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `game_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `player`
@@ -315,7 +362,7 @@ ALTER TABLE `player`
 -- AUTO_INCREMENT for table `player_game`
 --
 ALTER TABLE `player_game`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -345,11 +392,11 @@ ALTER TABLE `users_otps`
 -- AUTO_INCREMENT for table `users_remembered`
 --
 ALTER TABLE `users_remembered`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `users_resets`
 --
 ALTER TABLE `users_resets`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 COMMIT;
