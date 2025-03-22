@@ -38,6 +38,7 @@
 					<li><a class="menu__item" href="schedule">Schedule</a></li>
 					<li><a class="menu__item" href="roster">Roster</a></li>
 					<li><a class="menu__item" href="#">Beer</a></li>
+					<li><a class="menu__item" href="past-games">Past Games</a></li>
 					<li><hr /></li>
 					<li><a class="menu__item" href="logout">Logout</a></li>
 				</ul>

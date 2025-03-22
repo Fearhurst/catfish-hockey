@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+.row .col {
+	flex: auto;
+}
+
+h3 {
+	margin-top: 0;
+}
+
+.card {
+	padding-bottom: 1rem;
+}

@@ -5,13 +5,14 @@
 	<div class="card" data-gameid="<?php echo($game[0]['game_id']); ?>">
 		<div class="game-opponent"><?php echo ( ($game[0]['game_home'] == 1) ? 'vs. ' : '@ ' ); ?><?php echo($game[0]['game_opponent']); ?></div>
 		<div class="game-details">
-			<div class="game-date"><?php echo( date('D, M d', strtotime($game[0]['game_time'])) ); ?> - <?php echo( date('h:i a', strtotime($game[0]['game_time'])) ); ?></div>
+			<div class="game-date"><?php echo( date('D, M d, Y', strtotime($game[0]['game_time'])) ); ?> - <?php echo( date('h:i a', strtotime($game[0]['game_time'])) ); ?></div>
 			<div class="game-location"><?php echo( $game[0]['game_location'] ); ?></div>
 		</div>
 		
 		<?php $beerduty = $game[0]['beer_player_firstname'] . " " . $game[0]['beer_player_lastname']; ?>
 		<div class="duties"><span class="icon">🍺</span><?php echo( $beerduty == " " || empty($beerduty) ? ' Holy shit! Nobody\'s on beer!' : " " . $beerduty ); ?></div>
 		
+		<?php if ( new DateTime() < new DateTime($game[0]['game_time']) ) : ?>
 		<div class="attendance-container is-center">
 			<div class="attendance attendance-in button inner-pad<?php echo ( array_key_exists($id, $in) ? ' selected' : '' ); ?>">
 				<span class="button-text pull-left">
@@ -26,6 +27,7 @@
 				<span class="player-count pull-right"><?php echo(count($out)); ?></span>
 			</div>
 		</div>
+		<?php endif; ?>
 		
 	</div>
 	
