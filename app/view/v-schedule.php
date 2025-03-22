@@ -7,7 +7,7 @@
 	<div class="card" data-gameid="<?php echo($nextGame[0]['game_id']); ?>">
 		<div class="game-opponent"><?php echo ( ($nextGame[0]['game_home'] == 1) ? 'vs. ' : '@ ' ); ?><?php echo($nextGame[0]['game_opponent']); ?></div>
 		<div class="game-details">
-			<div class="game-date"><?php echo( date('D, M d', strtotime($nextGame[0]['game_time'])) ); ?> - <?php echo( date('h:i a', strtotime($nextGame[0]['game_time'])) ); ?></div>
+			<div class="game-date"><?php echo( date('D, M d, Y', strtotime($nextGame[0]['game_time'])) ); ?> - <?php echo( date('h:i a', strtotime($nextGame[0]['game_time'])) ); ?></div>
 			<div class="game-location"><?php echo( $nextGame[0]['game_location'] ); ?></div>
 		</div>
 		

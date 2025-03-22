@@ -35,7 +35,8 @@ $(document).ready(function() {
 			obj = JSON.parse(msg);
 			console.log (obj);
 			if (obj.result == 'success') {
-				btn.addClass('selected');
+				//btn.addClass('selected');
+				window.location.reload();
 			}
 			
 		});
