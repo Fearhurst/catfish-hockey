@@ -323,6 +323,8 @@ h3 {
 
 .button, [type=button], [type=reset], [type=submit], button {
 	transition: none;
+	background-color: var(--catfish-blue-dark);
+	color: #fff;
 }
 
 .player-number {

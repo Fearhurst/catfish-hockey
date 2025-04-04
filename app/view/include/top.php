@@ -40,6 +40,9 @@
 					<li><a class="menu__item" href="#">Beer</a></li>
 					<li><a class="menu__item" href="past-games">Past Games</a></li>
 					<li><hr /></li>
+					<?php if ($auth->hasRole(\Delight\Auth\Role::ADMIN)) : ?>
+					<li><a class="menu__item" href="admin">Admin</a></li>
+					<?php endif; ?>
 					<li><a class="menu__item" href="logout">Logout</a></li>
 				</ul>
 			</div>

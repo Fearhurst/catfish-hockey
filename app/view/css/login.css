@@ -12,7 +12,3 @@ header {
 	width: 45%;
 	margin-top: 6%;
 }
-
-[type=submit] {
-	background-color: var(--catfish-blue-dark);
-}

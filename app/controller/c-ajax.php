@@ -62,6 +62,52 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['command']) ) {
 			
 		break;
 		
+		case 'cmd_addUser' :
+			
+			if (
+				isset($_POST['password']) &&
+				isset($_POST['email']) &&
+				isset($_POST['firstname']) &&
+				isset($_POST['lastname']) &&
+				!empty($_POST['password']) &&
+				!empty($_POST['firstname']) &&
+				!empty($_POST['lastname']) &&
+				!empty($_POST['email'])
+			) {
+				try {
+					$userId = $auth->admin()->createUser($_POST['email'], $_POST['password'], NULL);
+					
+					$query = $db->prepare("INSERT INTO player (user_id, player_firstname, player_lastname, player_position, player_number) VALUES (:user_id, :player_firstname, :player_lastname, :player_position, :player_number)");
+					
+					$query->execute(
+						array(
+							"user_id" => $userId,
+							"player_firstname" => $_POST['firstname'],
+							"player_lastname" => $_POST['lastname'],
+							"player_position" => $_POST['position'],
+							"player_number" => $_POST['number']
+						)
+					);
+
+					exit(json_encode(array('result' => 'success', 'user_id' => $userId)));
+				
+				} catch (\Delight\Auth\InvalidEmailException $e) {
+					exit(json_encode(array('result' => 'error', 'message' => 'Invalid email address')));
+				
+				} catch (\Delight\Auth\InvalidPasswordException $e) {
+					exit(json_encode(array('result' => 'error', 'message' => 'Invalid password')));
+				
+				} catch (\Delight\Auth\UserAlreadyExistsException $e) {
+					exit(json_encode(array('result' => 'error', 'message' => 'Player already exists')));
+				
+				}
+				
+			}
+			
+			exit();
+			
+		break;
+		
 		
 		default :
 			exit(json_encode(array('result' => 'error')));
