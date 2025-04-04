@@ -5,7 +5,9 @@ if (!$auth->isLoggedIn()) {
 	exit();
 }
 
-// Get user ID
-$id = $auth->getUserId();
+if (!isset($_SESSION['player_id'])) {
+	header('Location: login');
+	exit();
+}
 
 ?>

@@ -14,13 +14,13 @@
 		
 		<?php if ( new DateTime() < new DateTime($game[0]['game_time']) ) : ?>
 		<div class="attendance-container is-center">
-			<div class="attendance attendance-in button inner-pad<?php echo ( array_key_exists($id, $in) ? ' selected' : '' ); ?>">
+			<div class="attendance attendance-in button inner-pad<?php echo ( array_key_exists($_SESSION['player_id'], $in) ? ' selected' : '' ); ?>">
 				<span class="button-text pull-left">
 					<span class="checkmark">⎦</span>IN
 				</span>
 				<span class="player-count pull-right"><?php echo(count($in)); ?></span>
 			</div>
-			<div class="attendance attendance-out button inner-pad<?php echo ( array_key_exists($id, $out) ? ' selected' : '' ); ?>">
+			<div class="attendance attendance-out button inner-pad<?php echo ( array_key_exists($_SESSION['player_id'], $out) ? ' selected' : '' ); ?>">
 				<span class="button-text pull-left">
 					<span class="x">✕</span>OUT
 				</span>

@@ -32,7 +32,7 @@ $query->execute();
 $upcomingGames = $query->fetchAll(PDO::FETCH_ASSOC);
 
 $query = $db->prepare("SELECT game_id, attendance FROM player_game WHERE player_id = :player_id");
-$query->execute( array(":player_id" => $id) );
+$query->execute( array(":player_id" => $_SESSION['player_id']) );
 $playerGames = $query->fetchAll(PDO::FETCH_KEY_PAIR);
 
 

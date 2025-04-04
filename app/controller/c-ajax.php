@@ -29,7 +29,7 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['command']) ) {
 				
 				// 1. Check if this user has a status already set for this game
 				$query = $db->prepare("SELECT id FROM player_game WHERE player_id = :player_id AND game_id = :game_id");
-				$query->execute( array("player_id" => $id, ":game_id" => $_POST['game_id']) );
+				$query->execute( array("player_id" => $_SESSION['player_id'], ":game_id" => $_POST['game_id']) );
 				$result = $query->fetchColumn();
 				
 				if (!empty($result)) {
@@ -47,7 +47,7 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['command']) ) {
 					// This is the first time this player has checked in for this game
 					$query = $db->prepare("INSERT into player_game (player_id, game_id, attendance) VALUES (:player_id, :game_id, :attendance)");
 					
-					if ($query->execute( array(":player_id" => $id, ":game_id" => $_POST['game_id'], ":attendance" => $_POST['attendance'])) ) {
+					if ($query->execute( array(":player_id" => $_SESSION['player_id'], ":game_id" => $_POST['game_id'], ":attendance" => $_POST['attendance'])) ) {
 						exit(json_encode(array('result' => 'success')));
 						
 					} else {

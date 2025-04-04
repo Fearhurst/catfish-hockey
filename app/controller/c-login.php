@@ -14,6 +14,14 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' ) {
 		$rememberDuration = (int) (60 * 60 * 24 * 365.25);
 		$auth->login($_POST['email'], $_POST['password'], $rememberDuration);
 		
+		// Get player details and add to the session
+		$player = getPlayerInfo($auth->getUserId());
+		
+		foreach ($player as $key => $val) {
+			//echo $key . ": " . $val . "<br />";
+			$_SESSION[$key] = $val;
+		}
+		
 		header('Location: schedule');
 		exit();
 	

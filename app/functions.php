@@ -113,7 +113,7 @@ function sendPasswordResetEmail($to, $action_url) {
 
 		$output = array('result' => 'Postmark Error', 'postmark_result' => $postError, 'message' => 'Unable to send email');
 		exit(json_encode($output));
-		return -1;
+		//return -1;
 
 	} catch(Exception $generalException) {
 		// A general exception is thrown if the API
@@ -121,7 +121,30 @@ function sendPasswordResetEmail($to, $action_url) {
 		$postError = $generalException->getMessage();
 		$output = array('result' => 'General Error', 'postmark_result' => $postError, 'message' => 'Unable to send email');
 		exit(json_encode($output));
-		return -1;
+		//return -1;
+	}
+	
+}
+
+function getPlayerInfo($user_id) {
+	
+	global $db;
+	global $cfg;
+	
+	try {
+	
+		$sql = "SELECT player_id, player_firstname, player_lastname, player_position, player_number FROM player WHERE user_id = :user_id LIMIT 1";
+		$query = $db->prepare($sql);
+		$query->execute( array("user_id" => $user_id) );
+		$player = $query->fetch(PDO::FETCH_ASSOC);
+		
+		if (!empty($player)) {
+			return $player;
+		}
+		
+	} catch(Exception $generalException) {
+		echo ($generalException);
+	
 	}
 	
 }
