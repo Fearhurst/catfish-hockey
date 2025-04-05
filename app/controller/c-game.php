@@ -12,9 +12,10 @@ $query = $db->prepare("SELECT G.game_id, G.game_time, G.game_opponent, G.game_lo
 $query->execute( array(":game_id" => $_GET['id']) );
 $game = $query->fetchAll(PDO::FETCH_ASSOC);
 
-$query = $db->prepare("SELECT P.player_id AS p_id, player_firstname, player_lastname, player_number,
+$query = $db->prepare("SELECT P.player_id AS p_id, player_firstname, player_lastname, player_number, player_position,
 	(SELECT attendance FROM player_game WHERE player_id = p_id AND game_id = :game_id) as game_attendance
-	FROM player P"
+	FROM player P
+	ORDER BY player_lastname"
 );
 $query->execute( array(":game_id" => $game[0]['game_id']) );
 $players = $query->fetchAll(PDO::FETCH_ASSOC);

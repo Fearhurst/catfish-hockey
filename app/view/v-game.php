@@ -2,10 +2,12 @@
 
 <div id="page-content">
 	
+	<script>let game_id = <?php echo($game[0]['game_id']); ?>;</script>
+	
 	<div class="card" data-gameid="<?php echo($game[0]['game_id']); ?>">
 		<div class="game-opponent"><?php echo ( ($game[0]['game_home'] == 1) ? 'vs. ' : '@ ' ); ?><?php echo($game[0]['game_opponent']); ?></div>
 		<div class="game-details">
-			<div class="game-date"><?php echo( date('D, M d, Y', strtotime($game[0]['game_time'])) ); ?> - <?php echo( date('h:i a', strtotime($game[0]['game_time'])) ); ?></div>
+			<div class="game-date"><?php echo( date('D, M d, Y', strtotime($game[0]['game_time'])) ); ?> - <?php echo( date('g:i a', strtotime($game[0]['game_time'])) ); ?></div>
 			<div class="game-location"><?php echo( $game[0]['game_location'] ); ?></div>
 		</div>
 		
@@ -57,7 +59,18 @@
 				<tr>
 					<td>
 						<span class="player-number in"><?php echo($player['player_number']); ?></span>
-						<span class="player-name"><?php echo($player['player_firstname']); ?> <?php echo($player['player_lastname']); ?></span>
+						<span class="player-name"><?php echo($player['player_firstname']); ?> <?php echo($player['player_lastname']); ?> - <?php echo($player['player_position']); ?></span>
+					</td>
+					<td class="admin-attendance-td">
+						<?php if ($auth->hasRole(\Delight\Auth\Role::ADMIN)) : ?>
+						<select class="admin-attendance" data-player-id="<?php echo($player['p_id']); ?>">
+							<option value=""></option>
+							<option value="in">In</option>
+							<option value="out">Out</option>
+						</select>
+						<?php else : ?>
+						&nbsp;
+						<?php endif; ?>
 					</td>
 				</tr>
 				<?php endforeach; ?>
@@ -74,7 +87,18 @@
 				<tr>
 					<td>
 						<span class="player-number out"><?php echo($player['player_number']); ?></span>
-						<span class="player-name"><?php echo($player['player_firstname']); ?> <?php echo($player['player_lastname']); ?></span>
+						<span class="player-name"><?php echo($player['player_firstname']); ?> <?php echo($player['player_lastname']); ?> - <?php echo($player['player_position']); ?></span>
+					</td>
+					<td class="admin-attendance-td">
+						<?php if ($auth->hasRole(\Delight\Auth\Role::ADMIN)) : ?>
+						<select class="admin-attendance" data-player-id="<?php echo($player['p_id']); ?>">
+							<option value=""></option>
+							<option value="in">In</option>
+							<option value="out">Out</option>
+						</select>
+						<?php else : ?>
+						&nbsp;
+						<?php endif; ?>
 					</td>
 				</tr>
 				<?php endforeach; ?>
@@ -87,11 +111,22 @@
 		<hr />
 		<table>
 			<tbody>
-				<?php foreach ($unknown as $player) :?>
+				<?php foreach ($unknown as $player) : ?>
 				<tr>
 					<td>
 						<span class="player-number unknown"><?php echo($player['player_number']); ?></span>
-						<span class="player-name"><?php echo($player['player_firstname']); ?> <?php echo($player['player_lastname']); ?></span>
+						<span class="player-name"><?php echo($player['player_firstname']); ?> <?php echo($player['player_lastname']); ?> - <?php echo($player['player_position']); ?></span>
+					</td>
+					<td class="admin-attendance-td">
+						<?php if ($auth->hasRole(\Delight\Auth\Role::ADMIN)) : ?>
+						<select class="admin-attendance" data-player-id="<?php echo($player['p_id']); ?>">
+							<option value=""></option>
+							<option value="in">In</option>
+							<option value="out">Out</option>
+						</select>
+						<?php else : ?>
+						&nbsp;
+						<?php endif; ?>
 					</td>
 				</tr>
 				<?php endforeach; ?>

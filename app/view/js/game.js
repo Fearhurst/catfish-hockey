@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-$('.attendance').on('click', function() {
+	$('.attendance').on('click', function() {
 		
 		event.stopPropagation();
 		
@@ -31,6 +31,31 @@ $('.attendance').on('click', function() {
 				attendance: attendance,
 				game_id: game_id
 			}
+		}).done(function(msg) {
+			obj = JSON.parse(msg);
+			console.log (obj);
+			if (obj.result == 'success') {
+				//btn.addClass('selected');
+				window.location.reload();
+			}
+			
+		});
+		
+	});
+	
+	$('.admin-attendance').on('change', function() {
+		console.log ( $(this).attr('data-player-id'), $(this).val() );
+		
+		$.ajax({
+			type: 'POST',
+			url: 'ajax',
+			data: {
+				command: 'cmd_setAttendance_admin',
+				attendance: $(this).val(),
+				game_id: game_id,
+				player_id: $(this).attr('data-player-id')
+			}
+		
 		}).done(function(msg) {
 			obj = JSON.parse(msg);
 			console.log (obj);

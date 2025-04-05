@@ -49,7 +49,7 @@
 	
 	<div class="row" style="margin-top: 1em;">
 		<div class="col">
-			<button id="btnAddUser" class="button">Add</button>
+			<button id="btnAddUser" class="button blue">Add</button>
 		</div>
 	</div>
 

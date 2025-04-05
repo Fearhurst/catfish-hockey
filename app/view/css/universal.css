@@ -323,6 +323,9 @@ h3 {
 
 .button, [type=button], [type=reset], [type=submit], button {
 	transition: none;
+}
+
+.button.blue {
 	background-color: var(--catfish-blue-dark);
 	color: #fff;
 }
@@ -367,4 +370,8 @@ table.striped tr:nth-of-type(1n) {
 
 table.striped tr:nth-of-type(2n) {
 	background-color: var(--catfish-blue-light);
+}
+
+.admin-attendance-td {
+	width: 130px;
 }
