@@ -11,8 +11,28 @@
 			<div class="game-location"><?php echo( $nextGame[0]['game_location'] ); ?></div>
 		</div>
 		
-		<?php $beerduty = $nextGame[0]['beer_player_firstname'] . " " . $nextGame[0]['beer_player_lastname']; ?>
-		<div class="duties"><span class="icon">🍺</span><?php echo( $beerduty == " " || empty($beerduty) ? ' Holy shit! Nobody\'s on beer!' : " " . $beerduty ); ?></div>
+		<div class="duties">
+			<?php $beerduty = $nextGame[0]['beer_player_firstname'] . " " . $nextGame[0]['beer_player_lastname']; ?>
+			<table>
+				<tbody>
+					<tr>
+						<td style="padding-left: 0;"><span class="icon">🍺</span><?php echo( $beerduty == " " || empty($beerduty) ? ' Nobody!' : " " . $beerduty ); ?></td>
+						<td class="admin-td">
+							<?php if ( $auth->hasRole(\Delight\Auth\Role::ADMIN) && strtotime($nextGame[0]['game_time']) > time() ) : ?>
+							<select class="admin-beerdute">
+								<option value=""></option>
+								<?php foreach ($players as $player) : ?>
+								<option value="<?php echo($player['p_id']); ?>"><?php echo($player['player_firstname'] . " " . $player['player_lastname']); ?></option>
+								<?php endforeach; ?>
+							</select>
+							<?php else : ?>
+							&nbsp;
+							<?php endif; ?>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 		
 		<div class="attendance-container is-center">
 			<div class="attendance attendance-in button inner-pad<?php echo ( (array_key_exists($nextGame[0]['game_id'], $playerGames) && $playerGames[$nextGame[0]['game_id']] == 'in' ) ? ' selected' : '' ); ?>">

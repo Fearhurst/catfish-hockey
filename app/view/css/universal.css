@@ -297,7 +297,7 @@ h3 {
 }
 
 .duties {
-	margin-top: 1.5em;
+	margin-top: 1em;
 }
 
 .duties .icon {
@@ -372,6 +372,6 @@ table.striped tr:nth-of-type(2n) {
 	background-color: var(--catfish-blue-light);
 }
 
-.admin-attendance-td {
-	width: 130px;
+.admin-td {
+	width: 80px;
 }
