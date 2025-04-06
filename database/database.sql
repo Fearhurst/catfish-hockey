@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Mar 22, 2025 at 05:45 AM
+-- Generation Time: Apr 06, 2025 at 04:27 AM
 -- Server version: 5.7.44
 -- PHP Version: 8.3.14
 
@@ -38,8 +38,8 @@ CREATE TABLE `game` (
 
 INSERT INTO `game` (`game_id`, `game_time`, `game_opponent`, `game_location`, `game_home`, `game_beer_player_id`, `catfish_score`, `opponent_score`) VALUES
 (1, '2025-03-18 22:30:00', 'Healthy Scratches', 'Ford PC 2', 1, 1, 6, 5),
-(2, '2025-04-01 22:15:00', 'Penguins', 'Rinx 3', 0, NULL, 0, 0),
-(3, '2025-04-08 19:30:00', '2nd B Group', 'Ford PC 2', 1, NULL, 0, 0),
+(2, '2025-04-01 22:15:00', 'Penguins', 'Rinx 3', 0, NULL, 0, 3),
+(3, '2025-04-08 19:30:00', 'Cerebral Czars', 'Rinx 2', 0, 4, 0, 0),
 (4, '2025-04-15 21:30:00', 'Winner G8', 'Rinx 2', 1, NULL, 0, 0);
 
 -- --------------------------------------------------------
@@ -50,20 +50,29 @@ INSERT INTO `game` (`game_id`, `game_time`, `game_opponent`, `game_location`, `g
 
 CREATE TABLE `player` (
   `player_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
   `player_firstname` varchar(50) NOT NULL,
   `player_lastname` varchar(100) NOT NULL,
-  `player_position` varchar(2) DEFAULT NULL,
-  `player_number` tinyint(3) UNSIGNED NOT NULL
+  `player_position` varchar(3) DEFAULT NULL,
+  `player_number` tinyint(3) UNSIGNED NOT NULL,
+  `player_nickname` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `player`
 --
 
-INSERT INTO `player` (`player_id`, `player_firstname`, `player_lastname`, `player_position`, `player_number`) VALUES
-(1, 'Chris', 'Fairhurst', 'RW', 5),
-(2, 'Lucas', 'Price', 'LW', 81),
-(3, 'Leo', 'Abramovich', 'C', 9);
+INSERT INTO `player` (`player_id`, `user_id`, `player_firstname`, `player_lastname`, `player_position`, `player_number`, `player_nickname`) VALUES
+(1, 1, 'Chris', 'Fairhurst', 'RW', 5, NULL),
+(2, 3, 'Mitch', 'Marner', 'FWD', 16, NULL),
+(3, 4, 'Auston', 'Matthews', 'C', 34, NULL),
+(4, 5, 'John', 'Tavares', 'C', 91, NULL),
+(5, 6, 'Max', 'Domi', 'LW', 11, NULL),
+(6, 7, 'Willy', 'Nylander', 'RW', 88, NULL),
+(7, 8, 'Joseph', 'Woll', 'G', 60, NULL),
+(8, 9, 'Morgan', 'Rielly', 'D', 44, NULL),
+(9, 10, 'Jake', 'McCabe', 'D', 22, NULL),
+(10, 11, 'Matthew', 'Knies', 'FWD', 23, NULL);
 
 -- --------------------------------------------------------
 
@@ -83,9 +92,19 @@ CREATE TABLE `player_game` (
 --
 
 INSERT INTO `player_game` (`id`, `player_id`, `game_id`, `attendance`) VALUES
-(1, 1, 1, 'in'),
-(2, 2, 1, 'out'),
-(3, 1, 2, 'out');
+(1, 2, 3, 'in'),
+(2, 1, 3, 'in'),
+(3, 9, 3, 'out'),
+(4, 3, 3, 'in'),
+(5, 4, 3, 'in'),
+(6, 7, 3, 'in'),
+(7, 10, 3, 'in'),
+(8, 1, 4, 'in'),
+(9, 5, 4, 'in'),
+(10, 10, 4, 'out'),
+(11, 2, 4, 'out'),
+(12, 9, 4, 'in'),
+(14, 5, 3, 'in');
 
 -- --------------------------------------------------------
 
@@ -112,7 +131,16 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `username`, `status`, `verified`, `resettable`, `roles_mask`, `registered`, `last_login`, `force_logout`) VALUES
-(1, 'cfairhurst@gmail.com', '$2y$10$SM9oo3tm0..DURRRvadNi.IwkV0f.5LJUbrO6NBaSfZXXEiOlPtmC', NULL, 0, 1, 1, 0, 1741552966, 1742617412, 5);
+(1, 'cfairhurst@gmail.com', '$2y$10$SM9oo3tm0..DURRRvadNi.IwkV0f.5LJUbrO6NBaSfZXXEiOlPtmC', NULL, 0, 1, 1, 1, 1741552966, 1743905190, 5),
+(3, 'cf@wmkr.ca', '$2y$10$Di0qA94544SaFtEsBMIqnOKatBMM6MbIvHNu94nBzfhgIWL/9cHV2', NULL, 0, 1, 1, 0, 1743744147, 1743744286, 0),
+(4, 'cfairhurst+1@gmail.com', '$2y$10$XxTs4ZNVAIaU2bkV8kHzoOM4COGaaEbhsR.gTglFqYjz8f8mgwDfy', NULL, 0, 1, 1, 0, 1743819870, NULL, 0),
+(5, 'cfairhurst+2@gmail.com', '$2y$10$1Oux7qtb6pI2sR2d3FghP.bUXZZ4SY/btmAVw6FU68X7NNy5jn39.', NULL, 0, 1, 1, 0, 1743819915, NULL, 0),
+(6, 'cfairhurst+3@gmail.com', '$2y$10$Z1wAkvjbRo.YmLYbWnlMZuoUHPAYxyxPAoaRqTRSFUtL/8TZjLHSC', NULL, 0, 1, 1, 0, 1743820012, 1743904666, 0),
+(7, 'cfairhurst+4@gmail.com', '$2y$10$qd9FBK8M7I3MnXhzaThaAO9GjEwFnUVbyjwha9EKqtbDTKQBI.7Ha', NULL, 0, 1, 1, 0, 1743820043, NULL, 0),
+(8, 'cfairhurst+5@gmail.com', '$2y$10$0igNeE6Yk61AW0sb/SJH1OO9yWoOKTZqnPquhskShXiPypns1Ar1u', NULL, 0, 1, 1, 0, 1743821514, NULL, 0),
+(9, 'cfairhurst+6@gmail.com', '$2y$10$OmUkxQwXFX4WP3NBlN5O5.Gh8sNrNPNq3Mgai8NeSZLInYskjBpQq', NULL, 0, 1, 1, 0, 1743821605, NULL, 0),
+(10, 'cfairhurst+7@gmail.com', '$2y$10$TrjpFnkYKxO8hhfwDj7.BOG.6QoCi6bCkx4VzCvd8Zq3FEpIKVkau', NULL, 0, 1, 1, 0, 1743821641, 1743901046, 0),
+(11, 'cfairhurst+8@gmail.com', '$2y$10$gIsZYymqHKaGJ.CqXmtJM.B5FiS2o/ohJ358gVBhzR7lWPxuOGEVa', NULL, 0, 1, 1, 0, 1743821682, 1743825822, 0);
 
 -- --------------------------------------------------------
 
@@ -179,7 +207,19 @@ CREATE TABLE `users_remembered` (
 --
 
 INSERT INTO `users_remembered` (`id`, `user`, `selector`, `token`, `expires`) VALUES
-(25, 1, 'vkItGi6dASC6BKmdDfJ82v01', '$2y$10$QYHgArd4o3jTC1GpzSWV.esPXG1Zcr8Rm9BwMn.YeTnw96fzYb8m2', 1774175013);
+(34, 1, 'PmSouluofWPqlBCJurQJkcFu', '$2y$10$IEvJ.nrb9Nq/b3.FCpOCleWZ9JbApfS69uDS6Uhp6b4r16gNwU2xC', 1775296830),
+(32, 1, 'U6Q0sqEzrdHjepxgiK9ClANb', '$2y$10$gdRm4snIoFEgqq8dz71PI.SzXftCROP6AcjguJJI8WfnUEwK7nnZi', 1775296726),
+(33, 1, 'e7wOWnngnsO6_HCpH5lD88CS', '$2y$10$c1OTY0p9ppLGKl4DNBQUp.MwwVKPULwksQJZeAk3c1NEas.MMRrMK', 1775296813),
+(29, 1, '_smP_ak6g_aT2WWJblUVGN3v', '$2y$10$fkZT3ZYwWBjo2ulBJEHVVOrm8XW0Hl5KJ2rFTYyCH4PxleJibPV56', 1775296368),
+(27, 1, '2CT6j2JyplsLXDqYKNCdgEVE', '$2y$10$zwo0tzk4GYCF0OLgbmKNaeeQrXN5SO9JxRduZ3Z7IJHE3l0FqsaDW', 1775296326),
+(25, 1, 'vkItGi6dASC6BKmdDfJ82v01', '$2y$10$QYHgArd4o3jTC1GpzSWV.esPXG1Zcr8Rm9BwMn.YeTnw96fzYb8m2', 1774175013),
+(28, 1, 'iuGi84g5asCGk34pPpJHvRB6', '$2y$10$ZdALw6S.l4BOTe/FKJceuOq/8CaQPSXRXKiin7zGUXBx0Y/tKH3Ie', 1775296344),
+(35, 1, '2Ip92Cp3XTitnhpS4rRB3YjN', '$2y$10$Ny4xOPe6B19.Cf3QIzjjA.l9p.BfRj3C1MqsorV9ICKyZcIrmDYIC', 1775296846),
+(36, 1, 'J4LSgo6LnMVPnmZsnaUA7jiH', '$2y$10$A8oKPjw8t3/XrZd2KAPiWeOve36wLb7T47yKfgHilGWl4CYPKg9K.', 1775296929),
+(44, 1, 'JYo2JCeRajFPbkR_SphezsnK', '$2y$10$RzcbmoTMBKDgYy/n4TurVeofRMR0HqUSsl7e9zm9WuKZaP2aB.Iri', 1775302017),
+(52, 1, 'uzXx3b5jfvmVOXJI5plzpp7i', '$2y$10$IeoNfumMg5OafCVPZodal.xFATPjO8944ZkfpbhieLXZzSEMX1TTy', 1775462790),
+(46, 10, 'rugUepERHWu2rCIlNAkulBlG', '$2y$10$Tkl5MQbNP0So8oGDIyGyj.pJSZ8A2m1KE/nmn6SCEZt2bO3JsnA5W', 1775380992),
+(50, 1, 'RJ2EhYAuLD6inbKKK0j7muBt', '$2y$10$w318M622EYE2X5aJ2Nh8q.jKQLppB0DhuAHJUV2Ac.d/Wvvsw4aK2', 1775458716);
 
 -- --------------------------------------------------------
 
@@ -356,19 +396,19 @@ ALTER TABLE `game`
 -- AUTO_INCREMENT for table `player`
 --
 ALTER TABLE `player`
-  MODIFY `player_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `player_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `player_game`
 --
 ALTER TABLE `player_game`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users_2fa`
@@ -392,7 +432,7 @@ ALTER TABLE `users_otps`
 -- AUTO_INCREMENT for table `users_remembered`
 --
 ALTER TABLE `users_remembered`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `users_resets`
