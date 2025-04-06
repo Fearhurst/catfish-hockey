@@ -2,4 +2,9 @@
 
 .card {
 	cursor: pointer;
+	z-index: 100;
+}
+
+.admin-beerduty {
+	z-index: 200;
 }

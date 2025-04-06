@@ -161,6 +161,31 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['command']) ) {
 			
 		break;
 		
+		case 'cmd_setBeerDuty_admin' :
+			
+			if (
+				isset($_POST['player_id']) &&
+				isset($_POST['game_id']) &&
+				is_numeric($_POST['player_id']) &&
+				is_numeric($_POST['game_id'])
+			) {
+				
+				$query = $db->prepare("UPDATE game SET game_beer_player_id = :player_id WHERE game_id = :game_id LIMIT 1");
+				$query->execute(
+					array(
+						":player_id" => $_POST['player_id'],
+						":game_id" => $_POST['game_id']
+					)
+				);
+				
+				exit(json_encode(array('result' => 'success')));
+					
+			}
+			
+			exit();
+		
+		break;
+		
 		
 		default :
 			exit(json_encode(array('result' => 'error')));

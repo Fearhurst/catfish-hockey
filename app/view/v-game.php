@@ -16,10 +16,10 @@
 			<table>
 				<tbody>
 					<tr>
-						<td style="padding-left: 0;"><span class="icon">🍺</span><?php echo( $beerduty == " " || empty($beerduty) ? ' Nobody!' : " " . $beerduty ); ?></td>
+						<td style="padding-left: 0;"><span class="icon">🍺</span><span class="on-beer-duty"><?php echo( $beerduty == " " || empty($beerduty) ? ' Nobody!' : " " . $beerduty ); ?></span></td>
 						<td class="admin-td">
 							<?php if ( $auth->hasRole(\Delight\Auth\Role::ADMIN) && strtotime($game[0]['game_time']) > time() ) : ?>
-							<select class="admin-beerdute">
+							<select class="admin-beerduty">
 								<option value=""></option>
 								<?php foreach ($players as $player) : ?>
 								<option value="<?php echo($player['p_id']); ?>"><?php echo($player['player_firstname'] . " " . $player['player_lastname']); ?></option>

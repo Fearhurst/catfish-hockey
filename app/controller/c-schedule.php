@@ -19,6 +19,10 @@ $query = $db->prepare("SELECT
 $query->execute();
 $nextGame = $query->fetchAll(PDO::FETCH_ASSOC);
 
+$query = $db->prepare("SELECT player_id, player_firstname, player_lastname FROM player ORDER BY player_lastname");
+$query->execute();
+$players = $query->fetchAll(PDO::FETCH_ASSOC);
+
 $query = $db->prepare("SELECT count(*) AS nextGameIn FROM player_game WHERE game_id = :game_id AND attendance = :attendance");
 $query->execute( array(":game_id" => $nextGame[0]['game_id'], ":attendance" => "in") );
 $nextGameIN = $query->fetchColumn();
